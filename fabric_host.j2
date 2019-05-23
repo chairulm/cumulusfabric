@@ -1,0 +1,23 @@
+[switches:children]
+spine
+leaf
+
+[switches:vars]
+ansible_ssh_user=cumulus 
+ansible_ssh_pass=CumulusLinux! 
+ansible_sudo_pass=CumulusLinux!
+net_used = '{{ ','.join(network) }}'
+
+[spine]
+{%- for host in spinedata %}
+{{ host.ip }} hostname={{ host.hostname }} as={{ host.as }} isl='{{ ','.join(host.isl) }}' rid={{ host.rid }}
+{%- endfor %}
+
+[spine:vars]
+
+[leaf]
+{%- for host in leafdata %}
+{{ host.ip }} hostname={{ host.hostname }} as={{ host.as }} isl='{{ ','.join(host.isl) }}' rid={{ host.rid }} mid={{ host.mid }} ipl='{{ ','.join(host.ipl) }}' pair_ip={{ host.pair_ip }}
+{%- endfor %}
+
+[leaf:vars]

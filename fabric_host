@@ -1,0 +1,21 @@
+[switches:children]
+spine
+leaf
+
+[switches:vars]
+ansible_ssh_user=cumulus 
+ansible_ssh_pass=CumulusLinux! 
+ansible_sudo_pass=CumulusLinux!
+net_used = '1.1.0.0,1.2.0.0'
+
+[spine]
+1.1.10.10 hostname=SPINE-1 as=65001 isl='swp1,swp2,swp3' rid=1.1.0.1
+
+[spine:vars]
+
+[leaf]
+1.1.10.11 hostname=LEAF-1 as=65201 isl='swp1' rid=1.2.0.1 mid=1-m ipl='swp2' pair_ip=1.1.10.12
+1.1.10.12 hostname=LEAF-2 as=65202 isl='swp1' rid=1.2.0.2 mid=1-b ipl='swp2' pair_ip=1.1.10.11
+1.1.10.13 hostname=LEAF-3 as=65203 isl='swp1' rid=1.2.0.3 mid= ipl='' pair_ip=
+
+[leaf:vars]
